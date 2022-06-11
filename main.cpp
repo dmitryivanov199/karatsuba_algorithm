@@ -1,6 +1,10 @@
 #include <iostream>
 
+#include "src/number.h"
+
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    Number x;
+    x.inputNumber();
+    x.printNumber();
     return 0;
 }

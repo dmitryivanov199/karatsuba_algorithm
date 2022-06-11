@@ -3,4 +3,4 @@ project(karatsuba_algorithm)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(karatsuba_algorithm main.cpp)
+add_executable(karatsuba_algorithm main.cpp src/number.h src/number.cpp)
