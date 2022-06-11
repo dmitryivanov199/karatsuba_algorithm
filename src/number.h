@@ -11,6 +11,8 @@ class Number {
 public:
     Number();
 
+    Number(const Number &number);
+
     ~Number();
 
     void inputNumber();

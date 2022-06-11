@@ -9,6 +9,15 @@ Number::Number() :
         bitWidth{0} {
 }
 
+Number::Number(const Number &number) {
+    bitWidth = number.bitWidth;
+    digits = new uint8_t[bitWidth];
+
+    for (size_t i{0}; i < bitWidth; i++) {
+        digits[i] = number.digits[i];
+    }
+}
+
 Number::~Number() {
     freeMemory();
 }
