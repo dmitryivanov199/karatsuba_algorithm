@@ -1,7 +1,7 @@
 #include <iostream>
 
-#include "src/karatsuba_algorithm.h"
-#include "src/number.h"
+#include "karatsuba_algorithm.h"
+#include "number.h"
 
 int main() {
     Number x;

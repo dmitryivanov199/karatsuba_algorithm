@@ -1,9 +1,5 @@
-//
-// Created by dmitry on 11.06.2022.
-//
-
-#ifndef KARATSUBA_ALGORITHM_NUMBER_H
-#define KARATSUBA_ALGORITHM_NUMBER_H
+#ifndef NUMBER_H
+#define NUMBER_H
 
 #include <iostream>
 
@@ -30,4 +26,4 @@ private:
     void saveDigits(const std::string &str);
 };
 
-#endif //KARATSUBA_ALGORITHM_NUMBER_H
+#endif //NUMBER_H

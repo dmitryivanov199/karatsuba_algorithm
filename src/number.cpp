@@ -1,7 +1,3 @@
-//
-// Created by dmitry on 11.06.2022.
-//
-
 #include "number.h"
 
 Number::Number() :
