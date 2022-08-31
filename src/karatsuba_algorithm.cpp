@@ -1,14 +1,5 @@
 #include "karatsuba_algorithm.h"
 
-KaratsubaMultiplication::KaratsubaMultiplication(const Number &x, const Number &y) :
-        x{x},
-        y{y} {
+std::string multiplieKaratsuba(const std::string &x, const std::string &y) {
+    return "";
 }
-
-KaratsubaMultiplication::~KaratsubaMultiplication() = default;
-
-Number KaratsubaMultiplication::multipleNumbers() {
-    return Number{};
-}
-
-KaratsubaMultiplication::KaratsubaMultiplication() = default;
