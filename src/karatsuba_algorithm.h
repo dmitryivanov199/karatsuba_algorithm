@@ -3,6 +3,6 @@
 
 #include <string>
 
-std::string multiplieKaratsuba(const std::string &x, const std::string &y);
+std::string multiplie_karatsuba(const std::string &x, const std::string &y);
 
 #endif //KARATSUBA_ALGORITHM_H

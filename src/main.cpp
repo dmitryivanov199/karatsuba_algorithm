@@ -3,9 +3,9 @@
 #include "karatsuba_algorithm.h"
 
 int main() {
-    std::string x{"1234"};
-    std::string y{"5678"};
-    std::string result{multiplieKaratsuba(x, y)};
+    std::string x{"4"};
+    std::string y{"8"};
+    std::string result{multiplie_karatsuba(x, y)};
 
     std::cout << x << " * " << y << " = " << result << std::endl;
 
