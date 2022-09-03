@@ -4,6 +4,8 @@
 
 static std::string multiplie(const std::string &x, const std::string &y);
 
+static bool check_data_correctness(const std::string &x, const std::string &y);
+
 static std::string align_number(const std::string &number);
 
 static void align_numbers(std::string &number1, std::string &number2);
@@ -31,7 +33,7 @@ std::string multiplie_karatsuba(const std::string &x, const std::string &y) {
 //--------------------------------------------------------------------------------------------------
 
 std::string multiplie(const std::string &x, const std::string &y) {
-    if (x.size() == 0 || y.size() == 0) {
+    if (!check_data_correctness(x, y)) {
         return "";
     }
 
@@ -73,6 +75,30 @@ std::string multiplie(const std::string &x, const std::string &y) {
     }
 
     return result;
+}
+
+static bool check_data_correctness(const std::string &x, const std::string &y) {
+    if (x.size() == 0 || y.size() == 0) {
+        return false;
+    }
+
+    size_t n{x.size()};
+
+    for (size_t i{0}; i < n; i++) {
+        if (x.at(i) < '0' || x.at(i) > '9') {
+            return false;
+        }
+    }
+
+    n = y.size();
+
+    for (size_t i{0}; i < n; i++) {
+        if (y.at(i) < '0' || y.at(i) > '9') {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 std::string align_number(const std::string &number) {
