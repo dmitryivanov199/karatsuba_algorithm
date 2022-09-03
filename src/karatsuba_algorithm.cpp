@@ -136,7 +136,7 @@ std::string sum(const std::string &n1, const std::string &n2) {
         }
         else {
             if (is_carry) {
-                if (sum > 10) {
+                if (sum >= 10) {
                     sum++;
                 }
             }
@@ -168,7 +168,12 @@ std::string sub(const std::string &n1, const std::string &n2) {
                 is_carry = (diff >= 0)? false : true;
             }
 
-            result.insert(0, std::to_string(diff));
+            if (is_carry) {
+                result.insert(0, std::to_string(10 + diff));
+            }
+            else {
+                result.insert(0, std::to_string(diff));
+            }
         }
         else {
             if (is_carry) {
