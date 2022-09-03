@@ -2,9 +2,9 @@
 
 //--------------------------------------------------------------------------------------------------
 
-static std::string multiplie(const std::string &x, const std::string &y);
-
 static bool check_data_correctness(const std::string &x, const std::string &y);
+
+static std::string multiplie(const std::string &x, const std::string &y);
 
 static std::string align_number(const std::string &number);
 
@@ -25,6 +25,10 @@ static void remove_start_zeros(std::string &number);
 //--------------------------------------------------------------------------------------------------
 
 std::string multiplie_karatsuba(const std::string &x, const std::string &y) {
+    if (!check_data_correctness(x, y)) {
+        return "";
+    }
+
     std::string result{multiplie(x, y)};
     remove_start_zeros(result);
     return result;
@@ -32,11 +36,31 @@ std::string multiplie_karatsuba(const std::string &x, const std::string &y) {
 
 //--------------------------------------------------------------------------------------------------
 
-std::string multiplie(const std::string &x, const std::string &y) {
-    if (!check_data_correctness(x, y)) {
-        return "";
+bool check_data_correctness(const std::string &x, const std::string &y) {
+    if (x.size() == 0 || y.size() == 0) {
+        return false;
     }
 
+    size_t n{x.size()};
+
+    for (size_t i{0}; i < n; i++) {
+        if (x.at(i) < '0' || x.at(i) > '9') {
+            return false;
+        }
+    }
+
+    n = y.size();
+
+    for (size_t i{0}; i < n; i++) {
+        if (y.at(i) < '0' || y.at(i) > '9') {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+std::string multiplie(const std::string &x, const std::string &y) {
     std::string aligned_x{align_number(x)};
     std::string aligned_y{align_number(y)};
     align_numbers(aligned_x, aligned_y);
@@ -75,30 +99,6 @@ std::string multiplie(const std::string &x, const std::string &y) {
     }
 
     return result;
-}
-
-static bool check_data_correctness(const std::string &x, const std::string &y) {
-    if (x.size() == 0 || y.size() == 0) {
-        return false;
-    }
-
-    size_t n{x.size()};
-
-    for (size_t i{0}; i < n; i++) {
-        if (x.at(i) < '0' || x.at(i) > '9') {
-            return false;
-        }
-    }
-
-    n = y.size();
-
-    for (size_t i{0}; i < n; i++) {
-        if (y.at(i) < '0' || y.at(i) > '9') {
-            return false;
-        }
-    }
-
-    return true;
 }
 
 std::string align_number(const std::string &number) {
@@ -214,7 +214,21 @@ std::string sub(std::string &number1, std::string &number2) {
 }
 
 void remove_start_zeros(std::string &number) {
+    bool is_all_zeros{true};
+    size_t n{number.size()};
+
+    for (size_t i{0}; i < n; i++) {
+        if (number.at(i) != '0') {
+            is_all_zeros = false;
+            break;
+        }
+    }
+
     while (number.at(0) == '0') {
+        if (is_all_zeros && number.size() == 1) {
+            return;
+        }
+
         number = number.erase(0, 1);
     }
 }
