@@ -12,7 +12,7 @@ static std::string get_half(const std::string &number, size_t n, half half);
 
 static std::string sum(const std::string &n1, const std::string &n2);
 
-//static std::string sub(const std::string &n1, const std::string &n2);
+static std::string sub(const std::string &n1, const std::string &n2);
 
 std::string multiplie_karatsuba(const std::string &x, const std::string &y) {
     if (x.size() == 0 || y.size() == 0) {
@@ -36,12 +36,12 @@ std::string multiplie_karatsuba(const std::string &x, const std::string &y) {
         std::string p{sum(a, b)};
         std::string q{sum(c, d)};
 
-        /*std::string ac{multiplie_karatsuba(a, c)};
+        std::string ac{multiplie_karatsuba(a, c)};
         std::string bd{multiplie_karatsuba(b, d)};
-        std::string pq{multiplie_karatsuba(p, q)};*/
+        std::string pq{multiplie_karatsuba(p, q)};
 
-        /*std::string adbc{sub(pq, ac)};
-        adbc = sub(adbc, bd);*/
+        std::string adbc{sub(pq, ac)};
+        adbc = sub(adbc, bd);
     }
 
     return result;
@@ -81,7 +81,6 @@ std::string sum(const std::string &n1, const std::string &n2) {
         if (sum < 10) {
             if (is_carry) {
                 sum++;
-
                 is_carry = (sum < 10)? false : true;
             }
 
@@ -104,6 +103,32 @@ std::string sum(const std::string &n1, const std::string &n2) {
     return result;
 }
 
-/*std::string sub(const std::string &n1, const std::string &n2) {
+std::string sub(const std::string &n1, const std::string &n2) {
+    size_t n{n1.size()};
+    std::string result{""};
+    result.reserve(n);
+    bool is_carry{false};
 
-}*/
+    for (size_t i{0}; i < n; i++) {
+        int diff{get_digit(n1.at(n - i - 1)) - get_digit(n2.at(n - i - 1))};
+
+        if (diff >= 0) {
+            if (is_carry) {
+                diff--;
+                is_carry = (diff >= 0)? false : true;
+            }
+
+            result.insert(0, std::to_string(diff));
+        }
+        else {
+            if (is_carry) {
+                diff--;
+            }
+
+            result.insert(0, std::to_string(10 + diff));
+            is_carry = true;
+        }
+    }
+
+    return result;
+}
