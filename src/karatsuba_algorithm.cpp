@@ -4,6 +4,8 @@
 
 static std::string align_number(const std::string &number);
 
+static void align_numbers(std::string &n1, std::string &n2);
+
 static bool is_pow2(size_t n);
 
 static uint8_t get_digit(const char string_view_digit);
@@ -14,6 +16,8 @@ static std::string sum(const std::string &n1, const std::string &n2);
 
 static std::string sub(const std::string &n1, const std::string &n2);
 
+static void remove_start_zeros(std::string &number);
+
 std::string multiplie_karatsuba(const std::string &x, const std::string &y) {
     if (x.size() == 0 || y.size() == 0) {
         return "";
@@ -21,6 +25,7 @@ std::string multiplie_karatsuba(const std::string &x, const std::string &y) {
 
     std::string aligned_x{align_number(x)};
     std::string aligned_y{align_number(y)};
+    align_numbers(aligned_x, aligned_y);
     size_t n{aligned_x.size()};
     std::string result{""};
 
@@ -34,14 +39,40 @@ std::string multiplie_karatsuba(const std::string &x, const std::string &y) {
         std::string d{get_half(aligned_y, n, half::RIGHT)};
 
         std::string p{sum(a, b)};
+        std::cout << p << " = " << a << " + " << b << "\n";
         std::string q{sum(c, d)};
+        std::cout << q << " = " << c << " + " << d << "\n";
 
         std::string ac{multiplie_karatsuba(a, c)};
         std::string bd{multiplie_karatsuba(b, d)};
         std::string pq{multiplie_karatsuba(p, q)};
 
+        align_numbers(ac, bd);
+        align_numbers(bd, pq);
+        align_numbers(ac, pq);
+
         std::string adbc{sub(pq, ac)};
+        std::cout << pq << " - " << ac << " = " << adbc << "\n";
+        std::cout << adbc << " - ";
         adbc = sub(adbc, bd);
+        std::cout << bd << " = " << adbc << "\n";
+
+        for (size_t i{0}; i < n; i++) {
+            ac.push_back('0');
+        }
+
+        for (size_t i{0}; i < n / 2; i++) {
+            adbc.push_back('0');
+        }
+
+        align_numbers(ac, adbc);
+        result = sum(ac, adbc);
+        std::cout << ac << " + " << adbc << " = " << result << "\n";
+        align_numbers(result, bd);
+        std::cout << result << " + ";
+        result = sum(result, bd);
+        //remove_start_zeros(result);
+        std::cout << bd << " = " << result << "\n";
     }
 
     return result;
@@ -55,6 +86,18 @@ std::string align_number(const std::string &number) {
     }
 
     return aligned_number;
+}
+
+void align_numbers(std::string &n1, std::string &n2) {
+    size_t max_n{(n1.size() > n2.size())? n1.size() : n2.size()};
+
+    while (n1.size() != max_n) {
+        n1.insert(0, std::to_string(0));
+    }
+
+    while (n2.size() != max_n) {
+        n2.insert(0, std::to_string(0));
+    }
 }
 
 bool is_pow2(size_t n) {
@@ -84,11 +127,18 @@ std::string sum(const std::string &n1, const std::string &n2) {
                 is_carry = (sum < 10)? false : true;
             }
 
-            result.insert(0, std::to_string(sum));
+            if (sum == 10) {
+                result.insert(0, std::to_string(0));
+            }
+            else {
+                result.insert(0, std::to_string(sum));
+            }
         }
         else {
             if (is_carry) {
-                sum++;
+                if (sum > 10) {
+                    sum++;
+                }
             }
 
             result.insert(0, std::to_string(sum - 10));
@@ -131,4 +181,10 @@ std::string sub(const std::string &n1, const std::string &n2) {
     }
 
     return result;
+}
+
+static void remove_start_zeros(std::string &number) {
+    while (number.at(0) == '0') {
+        number = number.erase(0, 1);
+    }
 }
