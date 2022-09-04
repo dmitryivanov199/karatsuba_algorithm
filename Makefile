@@ -1,5 +1,5 @@
 CC = g++
-FLAGS = -g -c -Wall -Wextra
+FLAGS = -c -Wall -Wextra
 
 SOURCEDIR = src
 BUILDDIR = build
