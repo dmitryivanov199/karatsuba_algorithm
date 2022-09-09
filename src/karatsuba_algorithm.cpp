@@ -1,4 +1,4 @@
-#include "karatsuba_algorithm.h"
+#include "karatsuba_algorithm.hpp"
 
 //--------------------------------------------------------------------------------------------------
 
@@ -6,7 +6,7 @@ static bool check_data_correctness(const std::string &x, const std::string &y);
 
 static std::string multiplie(const std::string &x, const std::string &y);
 
-static std::string align_number(const std::string &number);
+static std::string align_number_to_pow2(const std::string &number);
 
 static void align_numbers(std::string &number1, std::string &number2);
 
@@ -61,8 +61,8 @@ bool check_data_correctness(const std::string &x, const std::string &y) {
 }
 
 std::string multiplie(const std::string &x, const std::string &y) {
-    std::string aligned_x{align_number(x)};
-    std::string aligned_y{align_number(y)};
+    std::string aligned_x{align_number_to_pow2(x)};
+    std::string aligned_y{align_number_to_pow2(y)};
     align_numbers(aligned_x, aligned_y);
     size_t n{aligned_x.size()};
     std::string result{""};
@@ -101,7 +101,7 @@ std::string multiplie(const std::string &x, const std::string &y) {
     return result;
 }
 
-std::string align_number(const std::string &number) {
+std::string align_number_to_pow2(const std::string &number) {
     std::string aligned_number{number};
 
     while (!is_pow2(aligned_number.size())) {

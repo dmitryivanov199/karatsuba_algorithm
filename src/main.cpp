@@ -1,7 +1,7 @@
 #include <array>
 #include <iostream>
 
-#include "karatsuba_algorithm.h"
+#include "karatsuba_algorithm.hpp"
 
 bool complete_tests();
 
@@ -30,7 +30,7 @@ bool complete_tests() {
         "569569", "1",
         "1", "0",
         "578967865342645768965008564700123456789001234561230984562901856"};
-    std::array<std::string, tests_number> result{"2047", "4285682",
+    std::array<std::string, tests_number> correct_result{"2047", "4285682",
         "2182438305391500", "1593647984400552",
         "48590745364758665140925463524133", "0",
         "311554243", "",
@@ -38,7 +38,7 @@ bool complete_tests() {
         "4336444815241718079515519904590415390630320326242187901177486722719933887596652863286537437296895906200403602640826427631189536"};
 
     for (size_t i{0}; i < tests_number; i++) {
-        if (result.at(i).compare(multiplie_karatsuba(x.at(i), y.at(i))) != 0) {
+        if (correct_result.at(i).compare(multiplie_karatsuba(x.at(i), y.at(i))) != 0) {
             return false;
         }
     }

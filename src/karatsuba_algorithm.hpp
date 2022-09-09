@@ -1,5 +1,5 @@
-#ifndef KARATSUBA_ALGORITHM_H
-#define KARATSUBA_ALGORITHM_H
+#ifndef KARATSUBA_ALGORITHM_HPP
+#define KARATSUBA_ALGORITHM_HPP
 
 #include <string>
 
@@ -10,4 +10,4 @@ enum class half {
 
 std::string multiplie_karatsuba(const std::string &x, const std::string &y);
 
-#endif //KARATSUBA_ALGORITHM_H
+#endif //KARATSUBA_ALGORITHM_HPP
